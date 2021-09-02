@@ -40,9 +40,8 @@ namespace DMZJComicDownloader
                 IReadOnlyList<IWebElement> eles = driver.FindElements(By.CssSelector("div.cartoon_online_border ul li a"));
                 foreach(IWebElement el in eles)
                 {
-                    Thread.Sleep(2000);
                     el.Click();
-                    
+                    Thread.Sleep(2000);
                 }
             }
         }

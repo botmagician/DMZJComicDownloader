@@ -29,36 +29,31 @@
         private void InitializeComponent()
         {
             this.comicOptions = new System.Windows.Forms.GroupBox();
-            this.toolOptions = new System.Windows.Forms.GroupBox();
-            this.taskStatus = new System.Windows.Forms.GroupBox();
-            this.ctrlPanel = new System.Windows.Forms.Panel();
-            this.inforPanel = new System.Windows.Forms.Panel();
-            this.taskConsole = new System.Windows.Forms.TextBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.urlPanel = new System.Windows.Forms.Panel();
-            this.urlLabel = new System.Windows.Forms.Label();
             this.urlTextBox = new System.Windows.Forms.TextBox();
+            this.urlLabel = new System.Windows.Forms.Label();
             this.namePanel = new System.Windows.Forms.Panel();
-            this.nameLabel = new System.Windows.Forms.Label();
             this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.nameLabel = new System.Windows.Forms.Label();
             this.savePanel = new System.Windows.Forms.Panel();
-            this.saveLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.findFolderButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.beginLabel = new System.Windows.Forms.Label();
-            this.endLabel = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.saveLabel = new System.Windows.Forms.Label();
+            this.toolOptions = new System.Windows.Forms.GroupBox();
+            this.taskStatus = new System.Windows.Forms.GroupBox();
+            this.inforPanel = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.taskConsole = new System.Windows.Forms.TextBox();
+            this.ctrlPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.comicOptions.SuspendLayout();
-            this.taskStatus.SuspendLayout();
-            this.inforPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.urlPanel.SuspendLayout();
             this.namePanel.SuspendLayout();
             this.savePanel.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.taskStatus.SuspendLayout();
+            this.inforPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // comicOptions
@@ -70,6 +65,103 @@
             this.comicOptions.TabIndex = 0;
             this.comicOptions.TabStop = false;
             this.comicOptions.Text = "漫画选项";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.urlPanel);
+            this.flowLayoutPanel1.Controls.Add(this.namePanel);
+            this.flowLayoutPanel1.Controls.Add(this.savePanel);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(11, 20);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(448, 246);
+            this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // urlPanel
+            // 
+            this.urlPanel.Controls.Add(this.urlTextBox);
+            this.urlPanel.Controls.Add(this.urlLabel);
+            this.urlPanel.Location = new System.Drawing.Point(3, 3);
+            this.urlPanel.Name = "urlPanel";
+            this.urlPanel.Size = new System.Drawing.Size(431, 32);
+            this.urlPanel.TabIndex = 0;
+            // 
+            // urlTextBox
+            // 
+            this.urlTextBox.Location = new System.Drawing.Point(62, 6);
+            this.urlTextBox.Name = "urlTextBox";
+            this.urlTextBox.Size = new System.Drawing.Size(366, 21);
+            this.urlTextBox.TabIndex = 1;
+            // 
+            // urlLabel
+            // 
+            this.urlLabel.AutoSize = true;
+            this.urlLabel.Location = new System.Drawing.Point(3, 9);
+            this.urlLabel.Name = "urlLabel";
+            this.urlLabel.Size = new System.Drawing.Size(53, 12);
+            this.urlLabel.TabIndex = 0;
+            this.urlLabel.Text = "漫画地址";
+            // 
+            // namePanel
+            // 
+            this.namePanel.Controls.Add(this.nameTextBox);
+            this.namePanel.Controls.Add(this.nameLabel);
+            this.namePanel.Location = new System.Drawing.Point(3, 41);
+            this.namePanel.Name = "namePanel";
+            this.namePanel.Size = new System.Drawing.Size(431, 30);
+            this.namePanel.TabIndex = 1;
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.Location = new System.Drawing.Point(62, 3);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(366, 21);
+            this.nameTextBox.TabIndex = 1;
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(3, 6);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(53, 12);
+            this.nameLabel.TabIndex = 0;
+            this.nameLabel.Text = "漫画名称";
+            // 
+            // savePanel
+            // 
+            this.savePanel.Controls.Add(this.findFolderButton);
+            this.savePanel.Controls.Add(this.textBox1);
+            this.savePanel.Controls.Add(this.saveLabel);
+            this.savePanel.Location = new System.Drawing.Point(3, 77);
+            this.savePanel.Name = "savePanel";
+            this.savePanel.Size = new System.Drawing.Size(431, 31);
+            this.savePanel.TabIndex = 2;
+            // 
+            // findFolderButton
+            // 
+            this.findFolderButton.Location = new System.Drawing.Point(342, 5);
+            this.findFolderButton.Name = "findFolderButton";
+            this.findFolderButton.Size = new System.Drawing.Size(86, 23);
+            this.findFolderButton.TabIndex = 2;
+            this.findFolderButton.Text = "点我寻找地址";
+            this.findFolderButton.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(62, 5);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(274, 21);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // saveLabel
+            // 
+            this.saveLabel.AutoSize = true;
+            this.saveLabel.Location = new System.Drawing.Point(3, 10);
+            this.saveLabel.Name = "saveLabel";
+            this.saveLabel.Size = new System.Drawing.Size(53, 12);
+            this.saveLabel.TabIndex = 0;
+            this.saveLabel.Text = "储存位置";
             // 
             // toolOptions
             // 
@@ -92,13 +184,6 @@
             this.taskStatus.TabStop = false;
             this.taskStatus.Text = "任务状态";
             // 
-            // ctrlPanel
-            // 
-            this.ctrlPanel.Location = new System.Drawing.Point(12, 24);
-            this.ctrlPanel.Name = "ctrlPanel";
-            this.ctrlPanel.Size = new System.Drawing.Size(214, 192);
-            this.ctrlPanel.TabIndex = 0;
-            // 
             // inforPanel
             // 
             this.inforPanel.Controls.Add(this.progressBar1);
@@ -107,6 +192,13 @@
             this.inforPanel.Name = "inforPanel";
             this.inforPanel.Size = new System.Drawing.Size(581, 191);
             this.inforPanel.TabIndex = 1;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(216, 43);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(362, 37);
+            this.progressBar1.TabIndex = 1;
             // 
             // taskConsole
             // 
@@ -119,152 +211,22 @@
             this.taskConsole.Size = new System.Drawing.Size(575, 79);
             this.taskConsole.TabIndex = 0;
             // 
-            // progressBar1
+            // ctrlPanel
             // 
-            this.progressBar1.Location = new System.Drawing.Point(216, 43);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(362, 37);
-            this.progressBar1.TabIndex = 1;
+            this.ctrlPanel.Location = new System.Drawing.Point(12, 24);
+            this.ctrlPanel.Name = "ctrlPanel";
+            this.ctrlPanel.Size = new System.Drawing.Size(214, 192);
+            this.ctrlPanel.TabIndex = 0;
             // 
-            // flowLayoutPanel1
+            // button1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.urlPanel);
-            this.flowLayoutPanel1.Controls.Add(this.namePanel);
-            this.flowLayoutPanel1.Controls.Add(this.savePanel);
-            this.flowLayoutPanel1.Controls.Add(this.panel1);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(11, 20);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(448, 246);
-            this.flowLayoutPanel1.TabIndex = 2;
-            // 
-            // urlPanel
-            // 
-            this.urlPanel.Controls.Add(this.urlTextBox);
-            this.urlPanel.Controls.Add(this.urlLabel);
-            this.urlPanel.Location = new System.Drawing.Point(3, 3);
-            this.urlPanel.Name = "urlPanel";
-            this.urlPanel.Size = new System.Drawing.Size(431, 32);
-            this.urlPanel.TabIndex = 0;
-            // 
-            // urlLabel
-            // 
-            this.urlLabel.AutoSize = true;
-            this.urlLabel.Location = new System.Drawing.Point(3, 9);
-            this.urlLabel.Name = "urlLabel";
-            this.urlLabel.Size = new System.Drawing.Size(53, 12);
-            this.urlLabel.TabIndex = 0;
-            this.urlLabel.Text = "漫画地址";
-            // 
-            // urlTextBox
-            // 
-            this.urlTextBox.Location = new System.Drawing.Point(62, 6);
-            this.urlTextBox.Name = "urlTextBox";
-            this.urlTextBox.Size = new System.Drawing.Size(366, 21);
-            this.urlTextBox.TabIndex = 1;
-            // 
-            // namePanel
-            // 
-            this.namePanel.Controls.Add(this.nameTextBox);
-            this.namePanel.Controls.Add(this.nameLabel);
-            this.namePanel.Location = new System.Drawing.Point(3, 41);
-            this.namePanel.Name = "namePanel";
-            this.namePanel.Size = new System.Drawing.Size(431, 30);
-            this.namePanel.TabIndex = 1;
-            // 
-            // nameLabel
-            // 
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(3, 6);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(53, 12);
-            this.nameLabel.TabIndex = 0;
-            this.nameLabel.Text = "漫画名称";
-            // 
-            // nameTextBox
-            // 
-            this.nameTextBox.Location = new System.Drawing.Point(62, 3);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(366, 21);
-            this.nameTextBox.TabIndex = 1;
-            // 
-            // savePanel
-            // 
-            this.savePanel.Controls.Add(this.findFolderButton);
-            this.savePanel.Controls.Add(this.textBox1);
-            this.savePanel.Controls.Add(this.saveLabel);
-            this.savePanel.Location = new System.Drawing.Point(3, 77);
-            this.savePanel.Name = "savePanel";
-            this.savePanel.Size = new System.Drawing.Size(431, 31);
-            this.savePanel.TabIndex = 2;
-            // 
-            // saveLabel
-            // 
-            this.saveLabel.AutoSize = true;
-            this.saveLabel.Location = new System.Drawing.Point(3, 10);
-            this.saveLabel.Name = "saveLabel";
-            this.saveLabel.Size = new System.Drawing.Size(53, 12);
-            this.saveLabel.TabIndex = 0;
-            this.saveLabel.Text = "储存位置";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(62, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(274, 21);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // findFolderButton
-            // 
-            this.findFolderButton.Location = new System.Drawing.Point(342, 5);
-            this.findFolderButton.Name = "findFolderButton";
-            this.findFolderButton.Size = new System.Drawing.Size(86, 23);
-            this.findFolderButton.TabIndex = 2;
-            this.findFolderButton.Text = "点我寻找地址";
-            this.findFolderButton.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.textBox3);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.endLabel);
-            this.panel1.Controls.Add(this.beginLabel);
-            this.panel1.Location = new System.Drawing.Point(3, 114);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(170, 78);
-            this.panel1.TabIndex = 3;
-            // 
-            // beginLabel
-            // 
-            this.beginLabel.AutoSize = true;
-            this.beginLabel.Location = new System.Drawing.Point(3, 11);
-            this.beginLabel.Name = "beginLabel";
-            this.beginLabel.Size = new System.Drawing.Size(53, 12);
-            this.beginLabel.TabIndex = 0;
-            this.beginLabel.Text = "开始页数";
-            // 
-            // endLabel
-            // 
-            this.endLabel.AutoSize = true;
-            this.endLabel.Location = new System.Drawing.Point(3, 48);
-            this.endLabel.Name = "endLabel";
-            this.endLabel.Size = new System.Drawing.Size(53, 12);
-            this.endLabel.TabIndex = 1;
-            this.endLabel.Text = "结束页数";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(62, 8);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(74, 21);
-            this.textBox2.TabIndex = 2;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(62, 45);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(74, 21);
-            this.textBox3.TabIndex = 3;
+            this.button1.Location = new System.Drawing.Point(3, 114);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
@@ -277,9 +239,6 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.comicOptions.ResumeLayout(false);
-            this.taskStatus.ResumeLayout(false);
-            this.inforPanel.ResumeLayout(false);
-            this.inforPanel.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.urlPanel.ResumeLayout(false);
             this.urlPanel.PerformLayout();
@@ -287,8 +246,9 @@
             this.namePanel.PerformLayout();
             this.savePanel.ResumeLayout(false);
             this.savePanel.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.taskStatus.ResumeLayout(false);
+            this.inforPanel.ResumeLayout(false);
+            this.inforPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -313,11 +273,7 @@
         private System.Windows.Forms.Button findFolderButton;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label saveLabel;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label endLabel;
-        private System.Windows.Forms.Label beginLabel;
+        private System.Windows.Forms.Button button1;
     }
 }
 

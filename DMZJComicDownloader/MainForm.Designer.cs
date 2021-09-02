@@ -43,7 +43,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.toolOptions = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.saveButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.chooseBrowserLabel = new System.Windows.Forms.Label();
@@ -194,9 +193,9 @@
             // 
             this.toolOptions.Controls.Add(this.flowLayoutPanel2);
             this.toolOptions.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.toolOptions.Location = new System.Drawing.Point(464, 13);
+            this.toolOptions.Location = new System.Drawing.Point(463, 13);
             this.toolOptions.Name = "toolOptions";
-            this.toolOptions.Size = new System.Drawing.Size(322, 161);
+            this.toolOptions.Size = new System.Drawing.Size(188, 164);
             this.toolOptions.TabIndex = 1;
             this.toolOptions.TabStop = false;
             this.toolOptions.Text = "toolOptions";
@@ -205,29 +204,19 @@
             // 
             this.flowLayoutPanel2.Controls.Add(this.setProxyButton);
             this.flowLayoutPanel2.Controls.Add(this.panel1);
-            this.flowLayoutPanel2.Controls.Add(this.saveButton);
             this.flowLayoutPanel2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 17);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(316, 141);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(182, 144);
             this.flowLayoutPanel2.TabIndex = 0;
-            // 
-            // saveButton
-            // 
-            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveButton.Location = new System.Drawing.Point(3, 67);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(117, 56);
-            this.saveButton.TabIndex = 2;
-            this.saveButton.Text = "保存所有设置";
-            this.saveButton.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.chooseBrowserLabel);
-            this.panel1.Location = new System.Drawing.Point(126, 3);
+            this.panel1.Location = new System.Drawing.Point(3, 67);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(173, 37);
             this.panel1.TabIndex = 1;
@@ -422,7 +411,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label chooseBrowserLabel;
-        private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Label summaryLabel;
         private System.Windows.Forms.TextBox summaryTextBox;
         private System.Windows.Forms.Button quitButton;

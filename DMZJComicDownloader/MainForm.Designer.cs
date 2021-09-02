@@ -43,21 +43,22 @@
             this.button1 = new System.Windows.Forms.Button();
             this.toolOptions = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.setProxyButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.chooseBrowserLabel = new System.Windows.Forms.Label();
             this.taskStatus = new System.Windows.Forms.GroupBox();
             this.inforPanel = new System.Windows.Forms.Panel();
+            this.consoleLabel = new System.Windows.Forms.Label();
+            this.summaryLabel = new System.Windows.Forms.Label();
+            this.summaryTextBox = new System.Windows.Forms.TextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.taskConsole = new System.Windows.Forms.TextBox();
             this.ctrlPanel = new System.Windows.Forms.Panel();
-            this.startButton = new System.Windows.Forms.Button();
-            this.stopButton = new System.Windows.Forms.Button();
             this.quitButton = new System.Windows.Forms.Button();
-            this.summaryTextBox = new System.Windows.Forms.TextBox();
-            this.summaryLabel = new System.Windows.Forms.Label();
-            this.consoleLabel = new System.Windows.Forms.Label();
-            this.setProxyButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.comicOptions.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.urlPanel.SuspendLayout();
@@ -108,6 +109,7 @@
             this.urlTextBox.Name = "urlTextBox";
             this.urlTextBox.Size = new System.Drawing.Size(366, 21);
             this.urlTextBox.TabIndex = 1;
+            this.urlTextBox.TextChanged += new System.EventHandler(this.urlTextBox_TextChanged);
             // 
             // urlLabel
             // 
@@ -133,6 +135,7 @@
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(366, 21);
             this.nameTextBox.TabIndex = 1;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
             // 
             // nameLabel
             // 
@@ -161,14 +164,16 @@
             this.findFolderButton.TabIndex = 2;
             this.findFolderButton.Text = "点我寻找地址";
             this.findFolderButton.UseVisualStyleBackColor = true;
+            this.findFolderButton.Click += new System.EventHandler(this.findFolderButton_Click);
             // 
             // saveTextBox
             // 
             this.saveTextBox.Location = new System.Drawing.Point(62, 5);
             this.saveTextBox.Name = "saveTextBox";
+            this.saveTextBox.ReadOnly = true;
             this.saveTextBox.Size = new System.Drawing.Size(274, 21);
             this.saveTextBox.TabIndex = 1;
-            this.saveTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.saveTextBox.TextChanged += new System.EventHandler(this.saveTextBox_TextChanged);
             // 
             // saveLabel
             // 
@@ -199,6 +204,7 @@
             this.toolOptions.TabIndex = 1;
             this.toolOptions.TabStop = false;
             this.toolOptions.Text = "toolOptions";
+            this.toolOptions.Visible = false;
             // 
             // flowLayoutPanel2
             // 
@@ -211,6 +217,15 @@
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(182, 144);
             this.flowLayoutPanel2.TabIndex = 0;
+            // 
+            // setProxyButton
+            // 
+            this.setProxyButton.Location = new System.Drawing.Point(3, 3);
+            this.setProxyButton.Name = "setProxyButton";
+            this.setProxyButton.Size = new System.Drawing.Size(117, 58);
+            this.setProxyButton.TabIndex = 3;
+            this.setProxyButton.Text = "设置代理";
+            this.setProxyButton.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -265,6 +280,33 @@
             this.inforPanel.Size = new System.Drawing.Size(581, 191);
             this.inforPanel.TabIndex = 1;
             // 
+            // consoleLabel
+            // 
+            this.consoleLabel.AutoSize = true;
+            this.consoleLabel.Location = new System.Drawing.Point(3, 95);
+            this.consoleLabel.Name = "consoleLabel";
+            this.consoleLabel.Size = new System.Drawing.Size(53, 12);
+            this.consoleLabel.TabIndex = 4;
+            this.consoleLabel.Text = "任务信息";
+            // 
+            // summaryLabel
+            // 
+            this.summaryLabel.AutoSize = true;
+            this.summaryLabel.Location = new System.Drawing.Point(1, 3);
+            this.summaryLabel.Name = "summaryLabel";
+            this.summaryLabel.Size = new System.Drawing.Size(53, 12);
+            this.summaryLabel.TabIndex = 3;
+            this.summaryLabel.Text = "任务概述";
+            // 
+            // summaryTextBox
+            // 
+            this.summaryTextBox.Location = new System.Drawing.Point(0, 18);
+            this.summaryTextBox.Multiline = true;
+            this.summaryTextBox.Name = "summaryTextBox";
+            this.summaryTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.summaryTextBox.Size = new System.Drawing.Size(154, 65);
+            this.summaryTextBox.TabIndex = 2;
+            // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(160, 29);
@@ -293,24 +335,6 @@
             this.ctrlPanel.Size = new System.Drawing.Size(187, 143);
             this.ctrlPanel.TabIndex = 0;
             // 
-            // startButton
-            // 
-            this.startButton.Location = new System.Drawing.Point(3, 3);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(181, 40);
-            this.startButton.TabIndex = 0;
-            this.startButton.Text = "开始";
-            this.startButton.UseVisualStyleBackColor = true;
-            // 
-            // stopButton
-            // 
-            this.stopButton.Location = new System.Drawing.Point(3, 49);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(181, 40);
-            this.stopButton.TabIndex = 1;
-            this.stopButton.Text = "结束";
-            this.stopButton.UseVisualStyleBackColor = true;
-            // 
             // quitButton
             // 
             this.quitButton.Location = new System.Drawing.Point(3, 95);
@@ -320,41 +344,24 @@
             this.quitButton.Text = "退出";
             this.quitButton.UseVisualStyleBackColor = true;
             // 
-            // summaryTextBox
+            // stopButton
             // 
-            this.summaryTextBox.Location = new System.Drawing.Point(0, 18);
-            this.summaryTextBox.Multiline = true;
-            this.summaryTextBox.Name = "summaryTextBox";
-            this.summaryTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.summaryTextBox.Size = new System.Drawing.Size(154, 65);
-            this.summaryTextBox.TabIndex = 2;
+            this.stopButton.Location = new System.Drawing.Point(3, 49);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(181, 40);
+            this.stopButton.TabIndex = 1;
+            this.stopButton.Text = "强制停止";
+            this.stopButton.UseVisualStyleBackColor = true;
             // 
-            // summaryLabel
+            // startButton
             // 
-            this.summaryLabel.AutoSize = true;
-            this.summaryLabel.Location = new System.Drawing.Point(1, 3);
-            this.summaryLabel.Name = "summaryLabel";
-            this.summaryLabel.Size = new System.Drawing.Size(53, 12);
-            this.summaryLabel.TabIndex = 3;
-            this.summaryLabel.Text = "任务概述";
-            // 
-            // consoleLabel
-            // 
-            this.consoleLabel.AutoSize = true;
-            this.consoleLabel.Location = new System.Drawing.Point(3, 95);
-            this.consoleLabel.Name = "consoleLabel";
-            this.consoleLabel.Size = new System.Drawing.Size(53, 12);
-            this.consoleLabel.TabIndex = 4;
-            this.consoleLabel.Text = "任务信息";
-            // 
-            // setProxyButton
-            // 
-            this.setProxyButton.Location = new System.Drawing.Point(3, 3);
-            this.setProxyButton.Name = "setProxyButton";
-            this.setProxyButton.Size = new System.Drawing.Size(117, 58);
-            this.setProxyButton.TabIndex = 3;
-            this.setProxyButton.Text = "设置代理";
-            this.setProxyButton.UseVisualStyleBackColor = true;
+            this.startButton.Location = new System.Drawing.Point(3, 3);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(181, 40);
+            this.startButton.TabIndex = 0;
+            this.startButton.Text = "开始";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // MainForm
             // 
@@ -418,6 +425,7 @@
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Label consoleLabel;
         private System.Windows.Forms.Button setProxyButton;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 

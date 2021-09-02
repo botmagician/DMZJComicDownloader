@@ -17,14 +17,16 @@ namespace DMZJComicDownloader
 {
     public partial class MainForm : Form
     {
+        GlobalConfig globalConfig;
+        DownloadTask comicTask;
+        Task downloadTask;
+        bool isDownloading=false;
         public MainForm()
         {
+            globalConfig = GlobalConfig.LoadGlobalSettings();
+            comicTask = new DownloadTask(globalConfig);
             InitializeComponent();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
+            saveTextBox.Text = globalConfig.defaultSaveFolder;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -44,6 +46,43 @@ namespace DMZJComicDownloader
                     Thread.Sleep(2000);
                 }
             }
+        }
+
+        private void findFolderButton_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.ShowDialog();
+            comicTask.saveFolderUri = folderBrowserDialog1.SelectedPath;
+            globalConfig.defaultSaveFolder = comicTask.saveFolderUri;
+            saveTextBox.Text = comicTask.saveFolderUri;
+        }
+
+        private void saveTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void urlTextBox_TextChanged(object sender, EventArgs e)
+        {
+            comicTask.comicUrl = urlTextBox.Text;
+        }
+
+        private void nameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            comicTask.comicName = nameTextBox.Text;
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            if (isDownloading)
+            {
+                MessageBox.Show("正在运行，请勿重复开启任务");
+            }
+            downloadTask = Task.Run(dealTask);
+            isDownloading = true;
+        }
+        private void dealTask()
+        {
+
         }
     }
 }

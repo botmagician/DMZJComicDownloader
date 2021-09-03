@@ -331,6 +331,7 @@
             this.quitButton.TabIndex = 2;
             this.quitButton.Text = "退出";
             this.quitButton.UseVisualStyleBackColor = true;
+            this.quitButton.Click += new System.EventHandler(this.quitButton_Click);
             // 
             // stopButton
             // 
@@ -340,6 +341,7 @@
             this.stopButton.TabIndex = 1;
             this.stopButton.Text = "强制停止";
             this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // startButton
             // 

@@ -24,6 +24,7 @@ namespace DMZJComicDownloader
         DownloadTask comicTask;
         Task downloadTask;
         bool isDownloading=false;
+        CancellationTokenSource cancel;
         public MainForm()
         {
             globalConfig = GlobalConfig.LoadGlobalSettings();
@@ -61,13 +62,21 @@ namespace DMZJComicDownloader
             {
                 MessageBox.Show("正在运行，请勿重复开启任务");
             }
-            downloadTask = Task.Run(dealTask);
+            cancel = new CancellationTokenSource();
+            downloadTask = Task.Factory.StartNew(dealTask,cancel.Token,TaskCreationOptions.LongRunning,TaskScheduler.Default);
             isDownloading = true;
+            //dealTask();
         }
         private void dealTask()
         {
             using (IWebDriver driver = new FirefoxDriver())
             {
+                string savePath = comicTask.saveFolderUri + @"\" + comicTask.comicName;
+                if (!Directory.Exists(savePath))
+                {
+                    Directory.CreateDirectory(savePath);
+                }
+                savePath += "\\";
                 driver.Navigate().GoToUrl("https://manhua.dmzj.com/qnlhsjy");
                 IWebElement loginTip = driver.FindElement(By.CssSelector("div.login_tip.out"));
                 loginTip.Click();
@@ -78,24 +87,59 @@ namespace DMZJComicDownloader
                 int comicPartsCount = comicParts.Count;
                 for(int i = 0; i < comicPartsCount; i++)
                 {
+                    string savePathCap = savePath + "\\" + comicParts[i].Text;
+                    if (!Directory.Exists(savePathCap))
+                    {
+                        Directory.CreateDirectory(savePathCap);
+                    }
+                    savePathCap += "\\";
                     string originalWindow = driver.CurrentWindowHandle;
                     comicParts[i].Click();
-                    WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(1));
+                    WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(1000000000));
                     wait.Until(wd => wd.WindowHandles.Count == 2);
                     foreach (string window in driver.WindowHandles)
                     {
+                        
                         if (originalWindow != window)
                         {
                             driver.SwitchTo().Window(window);
                             break;
                         }
                     }
-                    wait.Until(wd => wd.FindElement(By.Id("center_box")));
+                    IWebElement pic = wait.Until(wd => wd.FindElement(By.Name("page_1")));
                     int pageCount = 1;
-                    IWebElement nextPage = driver.FindElement(By.ClassName("img_land_next"));
-                    IWebElement pic = driver.FindElement(By.Name("page_1"));
-                    Actions act = new Actions(driver);
-                    act.ContextClick(pic).Perform();
+                    if (i < comicPartsCount - 1)
+                    {
+                        while (driver.FindElement(By.ClassName("mask_panel")).GetAttribute("style").Contains("none"))
+                        {
+                            if (cancel.Token.IsCancellationRequested)
+                            {
+                                return;
+                            }
+                            pic = wait.Until(wd => wd.FindElement(By.Name("page_"+pageCount.ToString())));
+                            DownloadFile(pic.GetAttribute("src"), savePathCap + pageCount.ToString() + ".jpg");
+                            pageCount++;
+                            driver.FindElement(By.ClassName("img_land_next")).Click();
+                        }
+                    }
+                    else
+                    {
+                        while (!driver.Url.Contains("jump"))
+                        {
+                            if (cancel.Token.IsCancellationRequested)
+                            {
+                                return;
+                            }
+                            pic = wait.Until(wd => wd.FindElement(By.Name("page_" + pageCount.ToString())));
+                            DownloadFile(pic.GetAttribute("src"), savePathCap + pageCount.ToString() + ".jpg");
+                            pageCount++;
+                            driver.FindElement(By.ClassName("img_land_next")).Click();
+                        }
+                    }
+                    
+                   // IWebElement nextPage = driver.FindElement(By.ClassName("img_land_next"));
+                    
+                    //DownloadFile(pic.GetAttribute("src"), "ss.jpg");
                     //关闭标签页或窗口
                     driver.Close();
 
@@ -103,7 +147,47 @@ namespace DMZJComicDownloader
                     driver.SwitchTo().Window(originalWindow);
                 }
             }
+            isDownloading = false;
         }
-        
+        public void DownloadFile(string url,string filename)
+        {
+            try
+            {
+                HttpWebRequest req = WebRequest.CreateHttp(url);
+                req.Method = "GET";
+                req.Referer = "https://manhua.dmzj.com/";
+                req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36";
+                var response = req.GetResponse() as HttpWebResponse;
+                Stream stream = response.GetResponseStream();
+                Stream fileStream = new FileStream(filename, FileMode.OpenOrCreate);
+                byte[] bArr = new byte[1024];
+                int size;
+                do
+                {
+                    size = stream.Read(bArr, 0, (int)bArr.Length);
+                    fileStream.Write(bArr, 0, size);
+                } while (size > 0);
+                fileStream.Close();
+                stream.Close();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            if (isDownloading)
+            {
+                cancel.Cancel();
+                isDownloading = false;
+            }
+        }
+
+        private void quitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -77,7 +77,7 @@ namespace DMZJComicDownloader
                     Directory.CreateDirectory(savePath);
                 }
                 savePath += "\\";
-                driver.Navigate().GoToUrl("https://manhua.dmzj.com/qnlhsjy");
+                driver.Navigate().GoToUrl(comicTask.comicUrl);
                 IWebElement loginTip = driver.FindElement(By.CssSelector("div.login_tip.out"));
                 loginTip.Click();
                 string js = "var x=document.querySelectorAll(\"div.cartoon_online_border ul li a\");Array.from(x).forEach(function(t){t.setAttribute(\"target\",\"_blank\");});";

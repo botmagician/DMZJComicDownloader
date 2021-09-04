@@ -83,6 +83,8 @@ namespace DMZJComicDownloader
                 string js = "var x=document.querySelectorAll(\"div.cartoon_online_border ul li a\");Array.from(x).forEach(function(t){t.setAttribute(\"target\",\"_blank\");});";
                 IJavaScriptExecutor jsex = (IJavaScriptExecutor)driver;
                 string title = (string)jsex.ExecuteScript(js);
+                string deleteAd = "var elem = document.getElementsByClassName('ad_bottom_code')[0]; " + "elem.parentNode.removeChild(elem);  ";
+                jsex.ExecuteScript(deleteAd);
                 IReadOnlyList<IWebElement> comicParts = driver.FindElements(By.CssSelector("div.cartoon_online_border ul li a"));
                 int comicPartsCount = comicParts.Count;
                 for(int i = 0; i < comicPartsCount; i++)
@@ -110,7 +112,7 @@ namespace DMZJComicDownloader
                     int pageCount = 1;
                     if (i < comicPartsCount - 1)
                     {
-                        while (driver.FindElement(By.ClassName("mask_panel")).GetAttribute("style").Contains("none"))
+                        while (driver.FindElement(By.ClassName("mask_panel")).GetAttribute("style").Contains("none")&& !driver.Url.Contains("jump"))
                         {
                             if (cancel.Token.IsCancellationRequested)
                             {

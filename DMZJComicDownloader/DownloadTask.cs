@@ -9,22 +9,22 @@ namespace DMZJComicDownloader
     class DownloadTask
     {
         public string saveFolderUri;
-        public string comicName;
+        public ComicInfo comicInfo;
         public string comicUrl;
         public DownloadTask()
         {
             
         }
-        public DownloadTask(string url,string name,string folder)
+        public DownloadTask(string url,ComicInfo info,string folder)
         {
+            comicInfo = info;
             comicUrl = url;
-            comicName = name;
             saveFolderUri = folder;
         }
         public DownloadTask(GlobalConfig config)
         {
             saveFolderUri = config.defaultSaveFolder;
-            comicName = "";
+            comicInfo = null;
             comicUrl = "";
         }
     }

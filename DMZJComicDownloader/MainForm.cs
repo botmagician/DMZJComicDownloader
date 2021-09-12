@@ -15,6 +15,7 @@ using System.Threading;
 using System.Net;
 using System.IO;
 using OpenQA.Selenium.Interactions;
+using Newtonsoft.Json;
 
 namespace DMZJComicDownloader
 {
@@ -49,11 +50,7 @@ namespace DMZJComicDownloader
         private void urlTextBox_TextChanged(object sender, EventArgs e)
         {
             comicTask.comicUrl = urlTextBox.Text;
-        }
-
-        private void nameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            comicTask.comicName = nameTextBox.Text;
+            comicTask.comicInfo = null;
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -61,22 +58,23 @@ namespace DMZJComicDownloader
             if (isDownloading)
             {
                 MessageBox.Show("正在运行，请勿重复开启任务");
+                return;
             }
             cancel = new CancellationTokenSource();
             downloadTask = Task.Factory.StartNew(dealTask,cancel.Token,TaskCreationOptions.LongRunning,TaskScheduler.Default);
             isDownloading = true;
             //dealTask();
         }
+        public void invokeMethod()
+        {
+            comicInfoTextBox.Text = comicTask.comicInfo.ToString();
+        }
+        delegate void invokeDele();
         private void dealTask()
         {
+            
             using (IWebDriver driver = new FirefoxDriver())
             {
-                string savePath = comicTask.saveFolderUri + @"\" + comicTask.comicName;
-                if (!Directory.Exists(savePath))
-                {
-                    Directory.CreateDirectory(savePath);
-                }
-                savePath += "\\";
                 driver.Navigate().GoToUrl(comicTask.comicUrl);
                 IWebElement loginTip = driver.FindElement(By.CssSelector("div.login_tip.out"));
                 loginTip.Click();
@@ -85,6 +83,17 @@ namespace DMZJComicDownloader
                 string title = (string)jsex.ExecuteScript(js);
                 string deleteAd = "var elem = document.getElementsByClassName('ad_bottom_code')[0]; " + "elem.parentNode.removeChild(elem);  ";
                 jsex.ExecuteScript(deleteAd);
+                if (comicTask.comicInfo == null)
+                {
+                    comicTask.comicInfo = ComicInfo.GetComicInfo(comicTask.comicUrl, driver);
+                    comicInfoTextBox.Invoke(new invokeDele(invokeMethod));
+                }
+                string savePath = comicTask.saveFolderUri + @"\" + comicTask.comicInfo.name;
+                if (!Directory.Exists(savePath))
+                {
+                    Directory.CreateDirectory(savePath);
+                }
+                savePath += "\\";
                 IReadOnlyList<IWebElement> comicParts = driver.FindElements(By.CssSelector("div.cartoon_online_border ul li a"));
                 int comicPartsCount = comicParts.Count;
                 for(int i = 0; i < comicPartsCount; i++)
@@ -148,6 +157,8 @@ namespace DMZJComicDownloader
                     //切回到之前的标签页或窗口
                     driver.SwitchTo().Window(originalWindow);
                 }
+
+                File.WriteAllText(savePath + "info.json", JsonConvert.SerializeObject(comicTask.comicInfo));
             }
             isDownloading = false;
         }
@@ -190,6 +201,28 @@ namespace DMZJComicDownloader
         private void quitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+        
+        private ComicInfo getInfo(string comicUrl)
+        {
+            return ComicInfo.GetComicInfo(comicUrl);
+        }
+
+        private void getInfoButton_Click(object sender, EventArgs e)
+        {
+            comicTask.comicInfo = getInfo(comicTask.comicUrl);
+            comicInfoTextBox.Text = comicTask.comicInfo.ToString();
+        }
+
+        private void setComicInfoButton_Click(object sender, EventArgs e)
+        {
+            if (comicTask.comicInfo == null)
+            {
+                comicTask.comicInfo = getInfo(comicTask.comicUrl);
+            }
+            setComicInfoForm infoForm = new setComicInfoForm(comicTask.comicInfo);
+            infoForm.ShowDialog();
+            comicInfoTextBox.Text = comicTask.comicInfo.ToString();
         }
     }
 }
